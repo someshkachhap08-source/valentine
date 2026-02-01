@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💘</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: pink;
+    font-family: 'Comic Sans MS', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  .sunflower {
+    position: absolute;
+    font-size: 42px;
+    opacity: 0.85;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  .card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 360px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 10px;
+  }
+
+  .you-img {
+    width: 90px;
+    border-radius: 15px;
+    margin: 10px auto;
+    display: block;
+  }
+
+  .buttons {
+    margin-top: 15px;
+    position: relative;
+    height: 80px;
+  }
+
+  button {
+    padding: 14px 26px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    position: absolute;
+    transition: left 0.3s ease, top 0.3s ease;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+    left: 10%;
+    top: 0;
+    position: relative;
+    margin: 0;
+  }
+
+  #noBtn {
+    background: #ccc;
+    color: black;
+    left: 60%;
+    top: 0;
+  }
+
+  .popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 5;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 360px;
+    animation: pop 0.4s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .bear {
+    font-size: 80px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="sunflower" style="top:10%; left:5%;">🌻</div>
+<div class="sunflower" style="top:80%; left:10%;">🌻</div>
+<div class="sunflower" style="top:20%; right:5%;">🌻</div>
+<div class="sunflower" style="bottom:10%; right:15%;">🌻</div>
+
+<div class="card">
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <img src="you.png" class="you-img" alt="Me praying">
+
+  <p>(me asking very politely 🥺🙏)</p>
+
+  <div class="buttons">
+    <button id="yesBtn">YES 😍</button>
+    <button id="noBtn">NO 🙄</button>
+  </div>
+</div>
+
+<div class="popup" id="noPopup">
+  <div class="popup-content">
+    <h2>You are Lodu 🤨</h2>
+    <p>
+      But here, I have a big heart ❤️<br>
+      and a big ass 🍑<br>
+      so I give you another chance 😌
+    </p>
+    <button onclick="closeNoPopup()">Okay okay 😅</button>
+  </div>
+</div>
+
+<div class="popup" id="yesPopup">
+  <div class="popup-content">
+    <h2>Hahaha 😎</h2>
+    <p>I knew you would be my Valentine baby 💕</p>
+    <div class="bear">🧸🌻</div>
+    <p>Happy Valentine’s Day 💖</p>
+  </div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const noPopup = document.getElementById("noPopup");
+  const yesPopup = document.getElementById("yesPopup");
+  const music = document.getElementById("bgMusic");
+
+  function moveNoButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+  }
+
+  // Move NO button on hover (desktop) and touchstart (mobile)
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("touchstart", moveNoButton);
+
+  // Show NO popup on click
+  noBtn.addEventListener("click", () => {
+    noPopup.style.display = "flex";
+  });
+
+  function closeNoPopup() {
+    noPopup.style.display = "none";
+  }
+
+  // YES button behavior
+  document.getElementById("yesBtn").addEventListener("click", () => {
+    yesPopup.style.display = "flex";
+    music.play();
+  });
+</script>
+
+</body>
+</html>
